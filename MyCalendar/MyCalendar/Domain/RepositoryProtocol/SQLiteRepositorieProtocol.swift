@@ -12,7 +12,7 @@ protocol SQLiteRepositorieProtocol {
     func createTable()
     func deleteTable()
     func insertData(memo: Memo)
-    func readData() -> [Memo]
+    func getData() -> [Memo]
     func updateData(memo: Memo)
     func deleteData(id: UUID)
 }

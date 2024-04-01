@@ -93,7 +93,7 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
         }
     }
     
-    func readData() -> [Memo] {
+    func getData() -> [Memo] {
         let query = "select * from myDB"
         var statement: OpaquePointer? = nil
         var result: [Memo] = []

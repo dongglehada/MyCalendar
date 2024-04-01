@@ -20,14 +20,14 @@ private extension TabBarController {
         
         let memoVC = UINavigationController(rootViewController: MemoListViewController(viewModel: MemoListViewModel(sqlLiteRepository: SQLiteRepositorie())))
         memoVC.tabBarItem = UITabBarItem(
-            title: "메모",
+            title: "Memo",
             image: UIImage(systemName: "list.bullet"),
             selectedImage: UIImage(systemName: "list.bullet")
         )
         
         let calendarVC = UINavigationController(rootViewController: CalendarViewController())
         calendarVC.tabBarItem = UITabBarItem(
-            title: "캘린더",
+            title: "Calendar",
             image: UIImage(systemName: "calendar"),
             selectedImage: UIImage(systemName: "calendar")
         )

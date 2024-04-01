@@ -22,15 +22,15 @@ class MemoListTableViewCell: UITableViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "테스트테스트테스트"
         label.setLabel(font: Fonts.lg.boldFont, color: .black)
+        label.text = "Empty Title"
         return label
     }()
     
     private let subTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "테스트테스트테스트테스트테스트테스트테스트테스트테스트"
         label.setLabel(font: Fonts.md.normalFont, color: .gray)
+        label.text = "Empty Memo"
         return label
     }()
     
@@ -85,5 +85,7 @@ private extension MemoListTableViewCell {
 extension MemoListTableViewCell {
     
     func bind(memo: Memo) {
+        titleLabel.text = memo.title
+        subTitleLabel.text = memo.memo
     }
 }

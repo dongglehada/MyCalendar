@@ -18,6 +18,8 @@
 		085FE6A72BBAF48500F94825 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 085FE6A62BBAF48500F94825 /* RxRelay */; };
 		085FE6A92BBAF48E00F94825 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 085FE6A82BBAF48E00F94825 /* SQLite */; };
 		085FE6AB2BBAF49700F94825 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 085FE6AA2BBAF49700F94825 /* FSCalendar */; };
+		085FE6B32BBB0B6300F94825 /* MemoAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085FE6B22BBB0B6300F94825 /* MemoAddViewController.swift */; };
+		085FE6B52BBB0C2300F94825 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085FE6B42BBB0C2300F94825 /* MemoDetailViewController.swift */; };
 		08B912232BBAE48500F0678E /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B912222BBAE48500F0678E /* UITableViewCell+.swift */; };
 		08B912262BBAE53500F0678E /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B912252BBAE53500F0678E /* ViewModelProtocol.swift */; };
 		08B912282BBAE7D700F0678E /* MemoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B912272BBAE7D700F0678E /* MemoListTableViewCell.swift */; };
@@ -43,6 +45,8 @@
 		0848DEE32BBA89B9009E3BC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0848DEE62BBA89B9009E3BC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0848DEE82BBA89B9009E3BC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		085FE6B22BBB0B6300F94825 /* MemoAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoAddViewController.swift; sourceTree = "<group>"; };
+		085FE6B42BBB0C2300F94825 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
 		08B912222BBAE48500F0678E /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		08B912252BBAE53500F0678E /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		08B912272BBAE7D700F0678E /* MemoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTableViewCell.swift; sourceTree = "<group>"; };
@@ -167,6 +171,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		085FE6AC2BBB012A00F94825 /* MemoDetail */ = {
+			isa = PBXGroup;
+			children = (
+				085FE6B42BBB0C2300F94825 /* MemoDetailViewController.swift */,
+			);
+			path = MemoDetail;
+			sourceTree = "<group>";
+		};
+		085FE6B12BBB0B4C00F94825 /* MemoAdd */ = {
+			isa = PBXGroup;
+			children = (
+				085FE6B22BBB0B6300F94825 /* MemoAddViewController.swift */,
+			);
+			name = MemoAdd;
+			sourceTree = "<group>";
+		};
 		08B912212BBAE46C00F0678E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +254,8 @@
 		08EF83C92BBA9F8C004BE32F /* MemoScene */ = {
 			isa = PBXGroup;
 			children = (
+				085FE6B12BBB0B4C00F94825 /* MemoAdd */,
+				085FE6AC2BBB012A00F94825 /* MemoDetail */,
 				08EF83CE2BBAA22D004BE32F /* MemoList */,
 			);
 			path = MemoScene;
@@ -362,8 +384,10 @@
 				08B912232BBAE48500F0678E /* UITableViewCell+.swift in Sources */,
 				0848DEDB2BBA89B8009E3BC3 /* AppDelegate.swift in Sources */,
 				08EF83CB2BBA9FB6004BE32F /* MemoListViewController.swift in Sources */,
+				085FE6B52BBB0C2300F94825 /* MemoDetailViewController.swift in Sources */,
 				0848DEDD2BBA89B8009E3BC3 /* SceneDelegate.swift in Sources */,
 				08B912302BBAEE8600F0678E /* UILabel+.swift in Sources */,
+				085FE6B32BBB0B6300F94825 /* MemoAddViewController.swift in Sources */,
 				08EF83C82BBA9F2C004BE32F /* TabBarController.swift in Sources */,
 				08EF83D62BBAE070004BE32F /* MemoListViewModel.swift in Sources */,
 				08B912262BBAE53500F0678E /* ViewModelProtocol.swift in Sources */,

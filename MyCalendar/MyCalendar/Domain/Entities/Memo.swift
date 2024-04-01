@@ -10,9 +10,10 @@ import Foundation
 struct Memo: Codable {
     var id: UUID
     var updateDate: Date
-    var calendarDate: Date
+    var calendarDate: Date?
     var title: String
     var memo: String
     var isPin: Bool
-    var tag: String
+    var tag: String?
+    //tag -> String extension 으로 userDefaults 이용해서 넘기기?
 }

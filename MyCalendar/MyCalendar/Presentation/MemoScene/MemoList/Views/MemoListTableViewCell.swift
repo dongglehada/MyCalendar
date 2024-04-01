@@ -14,6 +14,12 @@ class MemoListTableViewCell: UITableViewCell {
     
     // MARK: - Components
     
+    private let tagView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .getColor(color: .gray)
+        return view
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "테스트테스트테스트"
@@ -49,16 +55,25 @@ private extension MemoListTableViewCell {
     }
     
     func setUpUI() {
+        contentView.addSubview(tagView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(subTitleLabel)
         
+        tagView.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().inset(Constants.spacings.md)
+            make.leading.equalToSuperview()
+            make.height.equalTo(Constants.spacings.sm)
+            make.width.equalTo(Constants.spacings.lg)
+        }
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(Constants.spacings.md)
+            make.leading.equalTo(tagView.snp.trailing).offset(Constants.spacings.md)
+            make.top.trailing.equalToSuperview().inset(Constants.spacings.md)
         }
         
         subTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(Constants.spacings.sm)
-            make.leading.trailing.bottom.equalToSuperview().inset(Constants.spacings.md)
+            make.leading.equalTo(titleLabel.snp.leading)
+            make.trailing.bottom.equalToSuperview().inset(Constants.spacings.md)
         }
         
     }
@@ -67,13 +82,6 @@ private extension MemoListTableViewCell {
 // MARK: - Bind
 extension MemoListTableViewCell {
     
-//    private func bind() {
-//        datas.bind { [weak self] _ in
-//            self?.collectionView.reloadData()
-//        }
-//    }
-//    
     func bind(memo: Memo) {
-//        datas.value = data.datas
     }
 }

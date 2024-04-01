@@ -21,19 +21,18 @@ private extension TabBarController {
         let memoVC = UINavigationController(rootViewController: MemoListViewController(viewModel: MemoListViewModel(sqlLiteRepository: SQLiteRepositorie())))
         memoVC.tabBarItem = UITabBarItem(
             title: "메모",
-            image: UIImage(systemName: "newspaper"),
-            selectedImage: UIImage(systemName: "newspaper.fill")
+            image: UIImage(systemName: "list.bullet"),
+            selectedImage: UIImage(systemName: "list.bullet")
         )
         
         let calendarVC = UINavigationController(rootViewController: CalendarViewController())
         calendarVC.tabBarItem = UITabBarItem(
             title: "캘린더",
-            image: UIImage(systemName: "newspaper"),
-            selectedImage: UIImage(systemName: "newspaper.fill")
+            image: UIImage(systemName: "calendar"),
+            selectedImage: UIImage(systemName: "calendar")
         )
         
-
         viewControllers = [memoVC, calendarVC]
-        tabBar.tintColor = .systemPink
+        tabBar.tintColor = .getColor(color: .pointColor)
     }
 }

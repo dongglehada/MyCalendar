@@ -60,14 +60,16 @@ private extension MemoListTableViewCell {
         contentView.addSubview(subTitleLabel)
         
         tagView.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().inset(Constants.spacings.md)
+            make.top.equalToSuperview().inset(Constants.spacings.md)
             make.leading.equalToSuperview()
             make.height.equalTo(Constants.spacings.sm)
             make.width.equalTo(Constants.spacings.lg)
         }
+        
         titleLabel.snp.makeConstraints { make in
             make.leading.equalTo(tagView.snp.trailing).offset(Constants.spacings.md)
-            make.top.trailing.equalToSuperview().inset(Constants.spacings.md)
+            make.top.equalTo(tagView.snp.top)
+            make.trailing.equalToSuperview().inset(Constants.spacings.md)
         }
         
         subTitleLabel.snp.makeConstraints { make in

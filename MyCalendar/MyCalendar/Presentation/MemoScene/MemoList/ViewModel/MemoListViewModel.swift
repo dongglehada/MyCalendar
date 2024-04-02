@@ -12,6 +12,8 @@ import RxCocoa
 
 class MemoListViewModel: ViewModelProtocol {
     
+    // MARK: - Properties
+    
     var disposeBag = DisposeBag()
     
     struct Input {
@@ -21,28 +23,32 @@ class MemoListViewModel: ViewModelProtocol {
     }
     
     struct Output {
-        let moveToMemoDetailVC: Signal<IndexPath>
+        let moveToMemoDetailVC: Observable<Memo>
         let moveToMemoAddVC: Signal<Void>
         let loadToMemoDatas: Observable<[Memo]>
     }
     
     func transform(input: Input) -> Output {
-        let loadToMemoDatas = input.viewWillAppear.withUnretained(self)
+        let loadToMemoDatas = input.viewWillAppear
+            .withUnretained(self)
             .map({(owner, _) in
                 return owner.sqlLiteRepository.getData()
             })
             .asObservable()
         
+        let moveToMemoDetailVC = input.didTapMemoCell
+            .withUnretained(self)
+            .map { (owner, indexPath) in
+                return owner.sqlLiteRepository.getData()[indexPath.row]
+            }
+            .asObservable()
+        
         return Output(
-            moveToMemoDetailVC: input.didTapMemoCell,
+            moveToMemoDetailVC: moveToMemoDetailVC,
             moveToMemoAddVC: input.didTapNavigationRightButton,
             loadToMemoDatas: loadToMemoDatas
         )
     }
-    
-    // MARK: - Properties
-    
-    private let memoDatas = BehaviorRelay<[Memo]>(value: [])
     
     let viewWillAppear = BehaviorRelay<Bool>(value: false)
     
@@ -51,6 +57,10 @@ class MemoListViewModel: ViewModelProtocol {
     
     init(sqlLiteRepository: SQLiteRepositorieProtocol) {
         self.sqlLiteRepository = sqlLiteRepository
+    }
+    
+    func isRunViewWillAppear(isRun: Bool) {
+        viewWillAppear.accept(isRun)
     }
     
 }

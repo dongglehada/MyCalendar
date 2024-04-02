@@ -36,7 +36,7 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
     }
     
     func createTable() {
-        let query = "create table if not exists myDB (id Int, memo text)"
+        let query = "create table if not exists myDB (id INTEGER primary key autoincrement, memo text)"
         var statement: OpaquePointer? = nil
         
         if sqlite3_prepare_v2(self.db, query, -1, &statement, nil) == SQLITE_OK {
@@ -67,14 +67,13 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
     }
     
     func insertData(memo: Memo) {
+        print("insertId:", memo.id)
         let query = "insert into myDB (id, memo) values (?,?)"
         var statement: OpaquePointer? = nil
         do {
             let data = try JSONEncoder().encode(memo)
             let dataToString = String(data: data, encoding: .utf8)
-            
             if sqlite3_prepare_v2(self.db, query, -1, &statement, nil) == SQLITE_OK {
-                sqlite3_bind_int64(statement, 1, Int64(memo.id.hashValue))
                 sqlite3_bind_text(statement, 2, NSString(string: dataToString!).utf8String, -1, nil)
                 
                 if sqlite3_step(statement) == SQLITE_DONE {
@@ -100,9 +99,11 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
         
         if sqlite3_prepare_v2(self.db, query, -1, &statement, nil) == SQLITE_OK {
             while sqlite3_step(statement) == SQLITE_ROW {
+                let id = sqlite3_column_int(statement, 0)
                 let memoData = String(cString: sqlite3_column_text(statement, 1))
                 do {
-                    let data = try JSONDecoder().decode(Memo.self, from: memoData.data(using: .utf8)!)
+                    var data = try JSONDecoder().decode(Memo.self, from: memoData.data(using: .utf8)!)
+                    data.id = id
                     result.append(data)
                 } catch {
                     print("JSONDecoder Error")
@@ -116,10 +117,11 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
     }
 
     func updateData(memo: Memo) {
+        print("updateId:", memo.id)
         do {
             let data = try JSONEncoder().encode(memo)
             guard let dataToString = String(data: data, encoding: .utf8) else { return }
-            let query = "update myDB set memo = '\(dataToString)' where id = \(memo.id.hashValue)"
+            let query = "update myDB set memo = '\(dataToString)' where id = \(memo.id)"
             var statement: OpaquePointer? = nil
             if sqlite3_prepare_v2(self.db, query, -1, &statement, nil) == SQLITE_OK {
                 if sqlite3_step(statement) == SQLITE_DONE {
@@ -134,6 +136,7 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
             print("JSONDecoder Error")
         }
     }
+
     
     func deleteData(id: UUID) {
         let query = "delete from myDB where id = \(id.hashValue)"

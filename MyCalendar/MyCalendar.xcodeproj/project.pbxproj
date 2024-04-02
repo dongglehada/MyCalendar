@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0835D75C2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835D75B2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift */; };
 		0848DEDB2BBA89B8009E3BC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848DEDA2BBA89B8009E3BC3 /* AppDelegate.swift */; };
 		0848DEDD2BBA89B8009E3BC3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848DEDC2BBA89B8009E3BC3 /* SceneDelegate.swift */; };
 		0848DEDF2BBA89B8009E3BC3 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848DEDE2BBA89B8009E3BC3 /* CalendarViewController.swift */; };
@@ -18,8 +19,9 @@
 		085FE6A72BBAF48500F94825 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 085FE6A62BBAF48500F94825 /* RxRelay */; };
 		085FE6A92BBAF48E00F94825 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 085FE6A82BBAF48E00F94825 /* SQLite */; };
 		085FE6AB2BBAF49700F94825 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 085FE6AA2BBAF49700F94825 /* FSCalendar */; };
-		085FE6B32BBB0B6300F94825 /* MemoAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085FE6B22BBB0B6300F94825 /* MemoAddViewController.swift */; };
-		085FE6B52BBB0C2300F94825 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085FE6B42BBB0C2300F94825 /* MemoDetailViewController.swift */; };
+		085FE6B32BBB0B6300F94825 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085FE6B22BBB0B6300F94825 /* MemoDetailViewController.swift */; };
+		085FE6B92BBBE55A00F94825 /* MemoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085FE6B82BBBE55A00F94825 /* MemoDetailViewModel.swift */; };
+		085FE6BC2BBBEE9700F94825 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 085FE6BB2BBBEE9700F94825 /* IQKeyboardManagerSwift */; };
 		08B912232BBAE48500F0678E /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B912222BBAE48500F0678E /* UITableViewCell+.swift */; };
 		08B912262BBAE53500F0678E /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B912252BBAE53500F0678E /* ViewModelProtocol.swift */; };
 		08B912282BBAE7D700F0678E /* MemoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B912272BBAE7D700F0678E /* MemoListTableViewCell.swift */; };
@@ -38,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0835D75B2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoToSQLiteUseCase.swift; sourceTree = "<group>"; };
 		0848DED72BBA89B8009E3BC3 /* MyCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0848DEDA2BBA89B8009E3BC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0848DEDC2BBA89B8009E3BC3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,8 +48,8 @@
 		0848DEE32BBA89B9009E3BC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0848DEE62BBA89B9009E3BC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0848DEE82BBA89B9009E3BC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		085FE6B22BBB0B6300F94825 /* MemoAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoAddViewController.swift; sourceTree = "<group>"; };
-		085FE6B42BBB0C2300F94825 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
+		085FE6B22BBB0B6300F94825 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
+		085FE6B82BBBE55A00F94825 /* MemoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewModel.swift; sourceTree = "<group>"; };
 		08B912222BBAE48500F0678E /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		08B912252BBAE53500F0678E /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		08B912272BBAE7D700F0678E /* MemoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTableViewCell.swift; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				085FE6BC2BBBEE9700F94825 /* IQKeyboardManagerSwift in Frameworks */,
 				085FE6A92BBAF48E00F94825 /* SQLite in Frameworks */,
 				085FE69B2BBAF47D00F94825 /* SnapKit in Frameworks */,
 				085FE69F2BBAF48500F94825 /* RxBlocking in Frameworks */,
@@ -81,6 +85,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0835D75A2BBC3FC100CB07A7 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				0835D75B2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		0848DECE2BBA89B8009E3BC3 = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +163,7 @@
 		0848DF022BBA8AF3009E3BC3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0835D75A2BBC3FC100CB07A7 /* UseCase */,
 				08EF83C42BBA9354004BE32F /* Repositories */,
 			);
 			path = Data;
@@ -174,17 +187,28 @@
 		085FE6AC2BBB012A00F94825 /* MemoDetail */ = {
 			isa = PBXGroup;
 			children = (
-				085FE6B42BBB0C2300F94825 /* MemoDetailViewController.swift */,
+				085FE6B62BBBE54600F94825 /* Views */,
+				085FE6B72BBBE54D00F94825 /* ViewModel */,
 			);
 			path = MemoDetail;
 			sourceTree = "<group>";
 		};
-		085FE6B12BBB0B4C00F94825 /* MemoAdd */ = {
+		085FE6B62BBBE54600F94825 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				085FE6B22BBB0B6300F94825 /* MemoAddViewController.swift */,
+				085FE6B22BBB0B6300F94825 /* MemoDetailViewController.swift */,
 			);
-			name = MemoAdd;
+			name = Views;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		085FE6B72BBBE54D00F94825 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				085FE6B82BBBE55A00F94825 /* MemoDetailViewModel.swift */,
+			);
+			name = ViewModel;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		08B912212BBAE46C00F0678E /* Extensions */ = {
@@ -254,7 +278,6 @@
 		08EF83C92BBA9F8C004BE32F /* MemoScene */ = {
 			isa = PBXGroup;
 			children = (
-				085FE6B12BBB0B4C00F94825 /* MemoAdd */,
 				085FE6AC2BBB012A00F94825 /* MemoDetail */,
 				08EF83CE2BBAA22D004BE32F /* MemoList */,
 			);
@@ -318,6 +341,7 @@
 				085FE6A62BBAF48500F94825 /* RxRelay */,
 				085FE6A82BBAF48E00F94825 /* SQLite */,
 				085FE6AA2BBAF49700F94825 /* FSCalendar */,
+				085FE6BB2BBBEE9700F94825 /* IQKeyboardManagerSwift */,
 			);
 			productName = MyCalendar;
 			productReference = 0848DED72BBA89B8009E3BC3 /* MyCalendar.app */;
@@ -352,6 +376,7 @@
 				0848DEF32BBA89D9009E3BC3 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				08EF83B82BBA8DBB004BE32F /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				08EF83C12BBA9313004BE32F /* XCRemoteSwiftPackageReference "SQLite" */,
+				085FE6BA2BBBEE9700F94825 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 0848DED82BBA89B8009E3BC3 /* Products */;
 			projectDirPath = "";
@@ -379,15 +404,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				085FE6B92BBBE55A00F94825 /* MemoDetailViewModel.swift in Sources */,
 				0848DEDF2BBA89B8009E3BC3 /* CalendarViewController.swift in Sources */,
 				08EF83D32BBAB164004BE32F /* SQLiteRepositorieProtocol.swift in Sources */,
 				08B912232BBAE48500F0678E /* UITableViewCell+.swift in Sources */,
 				0848DEDB2BBA89B8009E3BC3 /* AppDelegate.swift in Sources */,
 				08EF83CB2BBA9FB6004BE32F /* MemoListViewController.swift in Sources */,
-				085FE6B52BBB0C2300F94825 /* MemoDetailViewController.swift in Sources */,
 				0848DEDD2BBA89B8009E3BC3 /* SceneDelegate.swift in Sources */,
 				08B912302BBAEE8600F0678E /* UILabel+.swift in Sources */,
-				085FE6B32BBB0B6300F94825 /* MemoAddViewController.swift in Sources */,
+				085FE6B32BBB0B6300F94825 /* MemoDetailViewController.swift in Sources */,
 				08EF83C82BBA9F2C004BE32F /* TabBarController.swift in Sources */,
 				08EF83D62BBAE070004BE32F /* MemoListViewModel.swift in Sources */,
 				08B912262BBAE53500F0678E /* ViewModelProtocol.swift in Sources */,
@@ -398,6 +423,7 @@
 				08B9122A2BBAEAC300F0678E /* Constants.swift in Sources */,
 				08EF83C62BBA936C004BE32F /* SQLiteRepositorie.swift in Sources */,
 				08B912282BBAE7D700F0678E /* MemoListTableViewCell.swift in Sources */,
+				0835D75C2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift in Sources */,
 				08B912322BBAEE9400F0678E /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,7 +494,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -525,7 +551,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -549,7 +575,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -580,7 +606,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -637,6 +663,14 @@
 				minimumVersion = 6.6.0;
 			};
 		};
+		085FE6BA2BBBEE9700F94825 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager?tab=readme-ov-file";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.2;
+			};
+		};
 		08EF83B82BBA8DBB004BE32F /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
@@ -685,6 +719,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 08EF83B82BBA8DBB004BE32F /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		085FE6BB2BBBEE9700F94825 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 085FE6BA2BBBEE9700F94825 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -51,11 +51,10 @@ extension MemoListViewController {
         setUpUI()
         setUpNavigation()
         setUpBind()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.viewWillAppear.accept(true)
+        viewModel.isRunViewWillAppear(isRun: true)
     }
 }
 
@@ -75,6 +74,7 @@ private extension MemoListViewController {
     
     func setUpNavigation() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navigationRightButton)
+        self.navigationController?.navigationBar.tintColor = .getColor(color: .pointColor)
     }
     
     func setUpBind() {
@@ -88,14 +88,19 @@ private extension MemoListViewController {
         let output = viewModel.transform(input: input)
         
         output.moveToMemoDetailVC
-            .emit { indexPath in
-                print(indexPath)
-            }
+            .withUnretained(self)
+            .subscribe(onNext: { (owner ,memo) in
+                let vm = MemoDetailViewModel(sqlLiteRepository: SQLiteRepositorie())
+                vm.displayMemo(memo: memo)
+                let vc = MemoDetailViewController(viewModel: vm)
+                owner.navigationController?.pushViewController(vc, animated: true)
+            })
             .disposed(by: disposeBag)
         
         output.moveToMemoAddVC
             .emit { [weak self] _ in
-                self?.navigationController?.pushViewController(MemoDetailViewController(), animated: true)
+                guard let self = self else { return }
+                self.navigationController?.pushViewController(MemoDetailViewController(viewModel: MemoDetailViewModel(sqlLiteRepository: SQLiteRepositorie())), animated: true)
             }
             .disposed(by: disposeBag)
         
@@ -103,8 +108,8 @@ private extension MemoListViewController {
             .bind(to: memoTableView.rx.items(cellIdentifier: MemoListTableViewCell.identifier)) { (index: Int, element: Memo, cell: MemoListTableViewCell) in
                 cell.bind(memo: element)
                 cell.selectionStyle = .none
+                cell.accessoryType = .disclosureIndicator
             }
             .disposed(by: disposeBag)
     }
-    
 }

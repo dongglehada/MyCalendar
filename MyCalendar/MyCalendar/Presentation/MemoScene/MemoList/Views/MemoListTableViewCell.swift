@@ -14,12 +14,6 @@ class MemoListTableViewCell: UITableViewCell {
     
     // MARK: - Components
     
-    private let tagView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .getColor(color: .gray)
-        return view
-    }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.setLabel(font: Fonts.lg.boldFont, color: .black)
@@ -55,29 +49,17 @@ private extension MemoListTableViewCell {
     }
     
     func setUpUI() {
-        contentView.addSubview(tagView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(subTitleLabel)
         
-        tagView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(Constants.spacings.md)
-            make.leading.equalToSuperview()
-            make.height.equalTo(Constants.spacings.sm)
-            make.width.equalTo(Constants.spacings.lg)
-        }
-        
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(tagView.snp.trailing).offset(Constants.spacings.md)
-            make.top.equalTo(tagView.snp.top)
-            make.trailing.equalToSuperview().inset(Constants.spacings.md)
+            make.top.leading.trailing.equalToSuperview().inset(Constants.spacings.md)
         }
         
         subTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(Constants.spacings.sm)
-            make.leading.equalTo(titleLabel.snp.leading)
-            make.trailing.bottom.equalToSuperview().inset(Constants.spacings.md)
+            make.leading.trailing.bottom.equalToSuperview().inset(Constants.spacings.md)
         }
-        
     }
 }
 
@@ -85,7 +67,7 @@ private extension MemoListTableViewCell {
 extension MemoListTableViewCell {
     
     func bind(memo: Memo) {
-        titleLabel.text = memo.title
-        subTitleLabel.text = memo.memo
+        titleLabel.text = memo.title.isEmpty ? "Empty Title" : memo.title
+        subTitleLabel.text = memo.memo.isEmpty ? "Empty Memo" : memo.memo
     }
 }

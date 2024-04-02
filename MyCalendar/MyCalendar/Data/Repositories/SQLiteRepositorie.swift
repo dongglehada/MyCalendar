@@ -67,7 +67,6 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
     }
     
     func insertData(memo: Memo) {
-        print("insertId:", memo.id)
         let query = "insert into myDB (id, memo) values (?,?)"
         var statement: OpaquePointer? = nil
         do {
@@ -117,7 +116,6 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
     }
 
     func updateData(memo: Memo) {
-        print("updateId:", memo.id)
         do {
             let data = try JSONEncoder().encode(memo)
             guard let dataToString = String(data: data, encoding: .utf8) else { return }

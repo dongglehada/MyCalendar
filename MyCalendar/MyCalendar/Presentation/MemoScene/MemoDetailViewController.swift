@@ -73,6 +73,7 @@ extension MemoDetailViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
+        viewModel.isRunViewWillAppear(isRun: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -102,20 +103,6 @@ private extension MemoDetailViewController {
     
     func setUpBind() {
         
-        viewModel.displayMemo
-            .withUnretained(self)
-            .subscribe { (owner, memo) in
-                owner.viewModel.setMemo(memo: memo)
-                owner.titleTextField.text = memo.title
-                owner.textView.text = memo.memo
-                if memo.isPin {
-                    owner.navigationPinButton.tintColor = .getColor(color: .pointColor)
-                } else {
-                    owner.navigationPinButton.tintColor = .getColor(color: .gray)
-                }
-            }
-            .disposed(by: disposeBag)
-        
         let input = MemoDetailViewModel.Input(
             viewWillDisappear: viewModel.viewWillDisappear.asObservable(),
             didTapPinButton: navigationPinButton.rx.tap.asSignal(),
@@ -135,6 +122,20 @@ private extension MemoDetailViewController {
                     owner.navigationPinButton.tintColor = .getColor(color: .gray)
                 }
             })
+            .disposed(by: disposeBag)
+        
+        output.loadMemo
+            .withUnretained(self)
+            .subscribe { (owner, memo) in
+                owner.viewModel.setMemo(memo: memo)
+                owner.titleTextField.text = memo.title
+                owner.textView.text = memo.memo
+                if memo.isPin {
+                    owner.navigationPinButton.tintColor = .getColor(color: .pointColor)
+                } else {
+                    owner.navigationPinButton.tintColor = .getColor(color: .gray)
+                }
+            }
             .disposed(by: disposeBag)
     }
     

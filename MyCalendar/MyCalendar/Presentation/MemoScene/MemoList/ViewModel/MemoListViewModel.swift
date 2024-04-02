@@ -32,14 +32,14 @@ class MemoListViewModel: ViewModelProtocol {
         let loadToMemoDatas = input.viewWillAppear
             .withUnretained(self)
             .map({(owner, _) in
-                return owner.sqlLiteRepository.getData()
+                return owner.getMemoToSQLiteUseCase.excute()
             })
             .asObservable()
         
         let moveToMemoDetailVC = input.didTapMemoCell
             .withUnretained(self)
             .map { (owner, indexPath) in
-                return owner.sqlLiteRepository.getData()[indexPath.row]
+                return owner.getMemoToSQLiteUseCase.excute()[indexPath.row]
             }
             .asObservable()
         
@@ -53,10 +53,14 @@ class MemoListViewModel: ViewModelProtocol {
     let viewWillAppear = BehaviorRelay<Bool>(value: false)
     
     // MARK: - Repository
-    private let sqlLiteRepository: SQLiteRepositorieProtocol
+    private let sqliteRepository: SQLiteRepositorieProtocol
+    
+    // MARK: - UseCase
+    private let getMemoToSQLiteUseCase: GetMemoToSQLiteUseCase
     
     init(sqlLiteRepository: SQLiteRepositorieProtocol) {
-        self.sqlLiteRepository = sqlLiteRepository
+        self.sqliteRepository = sqlLiteRepository
+        self.getMemoToSQLiteUseCase = DefaultGetMemoToSQLiteUseCase(repository: sqliteRepository)
     }
     
     func isRunViewWillAppear(isRun: Bool) {

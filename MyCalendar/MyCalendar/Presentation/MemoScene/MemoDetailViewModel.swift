@@ -23,11 +23,7 @@ class MemoDetailViewModel: ViewModelProtocol {
     
     struct Output {
         let isPin: Observable<Bool>
-//        let isTag: Observable<Bool>
-//        let isDateSet: Observable<Bool>
-//        let moveTo
-//        let titleText: Observable<String>
-//        let memoText: Observable<String>
+        let loadMemo: Observable<Memo>
     }
     
     func transform(input: Input) -> Output {
@@ -36,6 +32,7 @@ class MemoDetailViewModel: ViewModelProtocol {
             .withUnretained(self)
             .subscribe { (owner, isRun) in
                 if isRun {
+                    owner.memo.updateDate = Date.now
                     owner.updateMemoToSQLiteUseCase.excute(memo: owner.memo)
                 }
             }
@@ -64,9 +61,12 @@ class MemoDetailViewModel: ViewModelProtocol {
             .asObservable()
 
         return Output(
-            isPin: isPin
+            isPin: isPin,
+            loadMemo: displayMemo.asObservable()
         )
     }
+    
+    let viewWillAppear = BehaviorRelay<Bool>(value: false)
     
     let viewWillDisappear = BehaviorRelay<Bool>(value: false)
     
@@ -85,6 +85,10 @@ class MemoDetailViewModel: ViewModelProtocol {
     
     func isRunViewWillDisappear(isRun: Bool) {
         viewWillDisappear.accept(isRun)
+    }
+    
+    func isRunViewWillAppear(isRun: Bool) {
+        viewWillAppear.accept(isRun)
     }
     
     func setMemo(memo: Memo) {

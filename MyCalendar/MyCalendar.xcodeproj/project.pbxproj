@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0835D75C2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835D75B2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift */; };
+		0835D75E2BBC43CF00CB07A7 /* GetMemoToSQLiteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835D75D2BBC43CF00CB07A7 /* GetMemoToSQLiteUseCase.swift */; };
 		0848DEDB2BBA89B8009E3BC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848DEDA2BBA89B8009E3BC3 /* AppDelegate.swift */; };
 		0848DEDD2BBA89B8009E3BC3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848DEDC2BBA89B8009E3BC3 /* SceneDelegate.swift */; };
 		0848DEDF2BBA89B8009E3BC3 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848DEDE2BBA89B8009E3BC3 /* CalendarViewController.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		0835D75B2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoToSQLiteUseCase.swift; sourceTree = "<group>"; };
+		0835D75D2BBC43CF00CB07A7 /* GetMemoToSQLiteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMemoToSQLiteUseCase.swift; sourceTree = "<group>"; };
 		0848DED72BBA89B8009E3BC3 /* MyCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0848DEDA2BBA89B8009E3BC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0848DEDC2BBA89B8009E3BC3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				0835D75B2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift */,
+				0835D75D2BBC43CF00CB07A7 /* GetMemoToSQLiteUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				085FE6B92BBBE55A00F94825 /* MemoDetailViewModel.swift in Sources */,
 				0848DEDF2BBA89B8009E3BC3 /* CalendarViewController.swift in Sources */,
 				08EF83D32BBAB164004BE32F /* SQLiteRepositorieProtocol.swift in Sources */,
+				0835D75E2BBC43CF00CB07A7 /* GetMemoToSQLiteUseCase.swift in Sources */,
 				08B912232BBAE48500F0678E /* UITableViewCell+.swift in Sources */,
 				0848DEDB2BBA89B8009E3BC3 /* AppDelegate.swift in Sources */,
 				08EF83CB2BBA9FB6004BE32F /* MemoListViewController.swift in Sources */,

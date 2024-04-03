@@ -11,8 +11,8 @@ protocol SQLiteRepositorieProtocol {
     func createDB() -> OpaquePointer?
     func createTable()
     func deleteTable()
-    func insertData(memo: Memo)
+    func insertMemo(memo: Memo)
     func getData() -> [Memo]
-    func updateData(memo: Memo)
-    func deleteData(id: UUID)
+    func updateMemo(memo: Memo)
+    func deleteMemo(memo: Memo)
 }

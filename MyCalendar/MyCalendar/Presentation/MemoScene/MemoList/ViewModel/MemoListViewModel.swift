@@ -18,14 +18,18 @@ class MemoListViewModel: ViewModelProtocol {
     
     struct Input {
         let viewWillAppear: Observable<Bool>
-        let didTapNavigationRightButton: Signal<Void>
+        let didTapNavigationEditButton: Signal<Void>
+        let didTapNavigationDeleteButton: Signal<Void>
         let didTapMemoCell: Signal<IndexPath>
+        let didDeleteMemo: Signal<IndexPath>
     }
     
     struct Output {
         let moveToMemoDetailVC: Observable<Memo>
         let moveToMemoAddVC: Signal<Void>
         let loadToMemoDatas: Observable<[Memo]>
+        let changeEditMode: Signal<Void>
+        let deleteMemo: Signal<IndexPath>
     }
     
     func transform(input: Input) -> Output {
@@ -45,8 +49,10 @@ class MemoListViewModel: ViewModelProtocol {
         
         return Output(
             moveToMemoDetailVC: moveToMemoDetailVC,
-            moveToMemoAddVC: input.didTapNavigationRightButton,
-            loadToMemoDatas: loadToMemoDatas
+            moveToMemoAddVC: input.didTapNavigationEditButton,
+            loadToMemoDatas: loadToMemoDatas,
+            changeEditMode: input.didTapNavigationDeleteButton,
+            deleteMemo: input.didDeleteMemo
         )
     }
     
@@ -67,4 +73,15 @@ class MemoListViewModel: ViewModelProtocol {
         viewWillAppear.accept(isRun)
     }
     
+    func memoTableViewReload() {
+        viewWillAppear.accept(true)
+    }
+    
+    func deleteMemo(memo: Memo) {
+        sqliteRepository.deleteMemo(memo: memo)
+    }
+    
+    func getMemo() -> [Memo]{
+        return getMemoToSQLiteUseCase.excute()
+    }
 }

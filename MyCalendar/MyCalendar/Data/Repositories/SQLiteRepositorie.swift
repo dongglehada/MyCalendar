@@ -66,7 +66,7 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
         }
     }
     
-    func insertData(memo: Memo) {
+    func insertMemo(memo: Memo) {
         let query = "insert into myDB (id, memo) values (?,?)"
         var statement: OpaquePointer? = nil
         do {
@@ -115,7 +115,7 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
         return result
     }
 
-    func updateData(memo: Memo) {
+    func updateMemo(memo: Memo) {
         do {
             let data = try JSONEncoder().encode(memo)
             guard let dataToString = String(data: data, encoding: .utf8) else { return }
@@ -136,8 +136,8 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
     }
 
     
-    func deleteData(id: UUID) {
-        let query = "delete from myDB where id = \(id.hashValue)"
+    func deleteMemo(memo: Memo) {
+        let query = "delete from myDB where id = \(memo.id)"
         var statement: OpaquePointer? = nil
         if sqlite3_prepare_v2(self.db, query, -1, &statement, nil) == SQLITE_OK {
             if sqlite3_step(statement) == SQLITE_DONE {

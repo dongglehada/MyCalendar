@@ -26,10 +26,18 @@ class MemoListViewController: BasicController {
         return view
     }()
     
-    private let navigationRightButton: UIButton = {
+    private let navigationMemoAddButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.tintColor = .getColor(color: .pointColor)
+        button.setTitle("Add", for: .normal)
+        button.setTitleColor(.getColor(color: .pointColor), for: .normal)
+        return button
+    }()
+    
+    private let navigationMemoEditButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Edit ", for: .normal)
+        button.setTitleColor(.getColor(color: .pointColor), for: .normal)
+        button.titleLabel?.lineBreakMode = .byWordWrapping
         return button
     }()
     
@@ -63,6 +71,7 @@ private extension MemoListViewController {
     
     func setUp() {
         memoTableView.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.identifier)
+        memoTableView.delegate = self
     }
     
     func setUpUI() {
@@ -70,19 +79,34 @@ private extension MemoListViewController {
         memoTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        navigationMemoEditButton.snp.makeConstraints { make in
+            make.width.equalTo(50)
+        }
     }
     
     func setUpNavigation() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: navigationRightButton)
+        let emptyButton = UIBarButtonItem()
+        self.navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(customView: navigationMemoAddButton),
+            emptyButton,
+            UIBarButtonItem(customView: navigationMemoEditButton)
+        ]
         self.navigationController?.navigationBar.tintColor = .getColor(color: .pointColor)
     }
     
     func setUpBind() {
         
+        memoTableView.rx.itemDeleted.bind { indexPath in
+            print(indexPath)
+        }
+        .disposed(by: disposeBag)
+        
         let input = MemoListViewModel.Input(
             viewWillAppear: viewModel.viewWillAppear.asObservable(),
-            didTapNavigationRightButton: navigationRightButton.rx.tap.asSignal(),
-            didTapMemoCell: memoTableView.rx.itemSelected.asSignal()
+            didTapNavigationEditButton: navigationMemoAddButton.rx.tap.asSignal(),
+            didTapNavigationDeleteButton: navigationMemoEditButton.rx.tap.asSignal(),
+            didTapMemoCell: memoTableView.rx.itemSelected.asSignal(),
+            didDeleteMemo: memoTableView.rx.itemDeleted.asSignal()
         )
         
         let output = viewModel.transform(input: input)
@@ -106,10 +130,40 @@ private extension MemoListViewController {
         
         output.loadToMemoDatas
             .bind(to: memoTableView.rx.items(cellIdentifier: MemoListTableViewCell.identifier)) { (index: Int, element: Memo, cell: MemoListTableViewCell) in
+                print("loadToMemoDatas")
                 cell.bind(memo: element)
-                cell.selectionStyle = .none
-                cell.accessoryType = .disclosureIndicator
+            }
+            .disposed(by: disposeBag)
+        
+        output.changeEditMode
+            .emit { [weak self] _ in
+                guard let self = self else { return }
+                let isEditing = !self.memoTableView.isEditing
+                self.memoTableView.setEditing(isEditing, animated: true)
+                self.navigationMemoEditButton.setTitle(isEditing ? "Done": " Edit ", for: .normal)
+            }
+            .disposed(by: disposeBag)
+        
+        output.deleteMemo
+            .emit { [weak self] indexPath in
+                print("deleteMemo")
+                guard let self = self else { return }
+                let memo = viewModel.getMemo()[indexPath.row]
+                self.viewModel.deleteMemo(memo: memo)
+                self.viewModel.memoTableViewReload()
             }
             .disposed(by: disposeBag)
     }
+}
+
+extension MemoListViewController: UITableViewDelegate {
+    
+//    tableviewedit
+//    tableview
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        <#code#>
+//    }
+    
+//    tablevieweditings
+//    tableviewedit
 }

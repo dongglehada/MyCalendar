@@ -63,10 +63,12 @@ class MemoListViewModel: ViewModelProtocol {
     
     // MARK: - UseCase
     private let getMemoToSQLiteUseCase: GetMemoToSQLiteUseCase
+    private let deleteMemoToSQLiteUseCase: DeleteMemoToSQLiteUseCase
     
     init(sqlLiteRepository: SQLiteRepositorieProtocol) {
         self.sqliteRepository = sqlLiteRepository
         self.getMemoToSQLiteUseCase = DefaultGetMemoToSQLiteUseCase(repository: sqliteRepository)
+        self.deleteMemoToSQLiteUseCase = DefaultDeleteMemoToSQLiteUseCase(repository: sqlLiteRepository)
     }
     
     func isRunViewWillAppear(isRun: Bool) {
@@ -78,7 +80,7 @@ class MemoListViewModel: ViewModelProtocol {
     }
     
     func deleteMemo(memo: Memo) {
-        sqliteRepository.deleteMemo(memo: memo)
+        deleteMemoToSQLiteUseCase.excute(memo: memo)
     }
     
     func getMemo() -> [Memo]{

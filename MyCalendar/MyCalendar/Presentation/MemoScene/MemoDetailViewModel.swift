@@ -70,9 +70,9 @@ class MemoDetailViewModel: ViewModelProtocol {
     
     let viewWillDisappear = BehaviorRelay<Bool>(value: false)
     
-    var memo = Memo(id: 0, updateDate: Date.now, title: "", memo: "", isPin: false)
+    private var memo = Memo(id: 0, updateDate: Date.now, title: "", memo: "", isPin: false)
     
-    var displayMemo = BehaviorRelay(value: Memo(id: 0, updateDate: Date.now, title: "", memo: "", isPin: false))
+    private var displayMemo = BehaviorRelay(value: Memo(id: 0, updateDate: Date.now, title: "", memo: "", isPin: false))
     
     // MARK: - Repository
     private let sqlLiteRepository: SQLiteRepositorieProtocol

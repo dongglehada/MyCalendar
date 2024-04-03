@@ -157,6 +157,7 @@
 		0848DF012BBA8AE5009E3BC3 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				0835D75A2BBC3FC100CB07A7 /* UseCase */,
 				08EF83D12BBAB135004BE32F /* RepositoryProtocol */,
 				0848DF032BBA8B2B009E3BC3 /* Entities */,
 			);
@@ -166,7 +167,6 @@
 		0848DF022BBA8AF3009E3BC3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0835D75A2BBC3FC100CB07A7 /* UseCase */,
 				08EF83C42BBA9354004BE32F /* Repositories */,
 			);
 			path = Data;

@@ -71,7 +71,6 @@ private extension MemoListViewController {
     
     func setUp() {
         memoTableView.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.identifier)
-        memoTableView.delegate = self
     }
     
     func setUpUI() {
@@ -95,11 +94,6 @@ private extension MemoListViewController {
     }
     
     func setUpBind() {
-        
-        memoTableView.rx.itemDeleted.bind { indexPath in
-            print(indexPath)
-        }
-        .disposed(by: disposeBag)
         
         let input = MemoListViewModel.Input(
             viewWillAppear: viewModel.viewWillAppear.asObservable(),
@@ -130,7 +124,6 @@ private extension MemoListViewController {
         
         output.loadToMemoDatas
             .bind(to: memoTableView.rx.items(cellIdentifier: MemoListTableViewCell.identifier)) { (index: Int, element: Memo, cell: MemoListTableViewCell) in
-                print("loadToMemoDatas")
                 cell.bind(memo: element)
             }
             .disposed(by: disposeBag)
@@ -146,7 +139,6 @@ private extension MemoListViewController {
         
         output.deleteMemo
             .emit { [weak self] indexPath in
-                print("deleteMemo")
                 guard let self = self else { return }
                 let memo = viewModel.getMemo()[indexPath.row]
                 self.viewModel.deleteMemo(memo: memo)
@@ -154,16 +146,4 @@ private extension MemoListViewController {
             }
             .disposed(by: disposeBag)
     }
-}
-
-extension MemoListViewController: UITableViewDelegate {
-    
-//    tableviewedit
-//    tableview
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//        <#code#>
-//    }
-    
-//    tablevieweditings
-//    tableviewedit
 }

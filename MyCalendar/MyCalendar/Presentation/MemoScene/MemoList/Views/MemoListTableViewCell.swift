@@ -28,6 +28,14 @@ class MemoListTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let pinImageView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(systemName: "pin")
+        view.tintColor = .getColor(color: .pointColor)
+        view.isHidden = true
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUp()
@@ -49,11 +57,18 @@ private extension MemoListTableViewCell {
     }
     
     func setUpUI() {
+        contentView.addSubview(pinImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(subTitleLabel)
         
+        pinImageView.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(Constants.spacings.md)
+            make.size.equalTo(Constants.spacings.lg)
+        }
+        
         titleLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(Constants.spacings.md)
+            make.top.leading.equalToSuperview().inset(Constants.spacings.md)
+            make.trailing.equalTo(pinImageView.snp.leading).inset(Constants.spacings.md)
         }
         
         subTitleLabel.snp.makeConstraints { make in
@@ -69,5 +84,6 @@ extension MemoListTableViewCell {
     func bind(memo: Memo) {
         titleLabel.text = memo.title.isEmpty ? "Empty Title" : memo.title
         subTitleLabel.text = memo.memo.isEmpty ? "Empty Memo" : memo.memo
+        pinImageView.isHidden = !memo.isPin
     }
 }

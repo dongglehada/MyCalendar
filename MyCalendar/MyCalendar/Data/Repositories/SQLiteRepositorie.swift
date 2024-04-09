@@ -17,6 +17,7 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
     init() {
         self.db = createDB()
         createTable()
+        print(self, "init")
     }
     
     func createDB() -> OpaquePointer? {

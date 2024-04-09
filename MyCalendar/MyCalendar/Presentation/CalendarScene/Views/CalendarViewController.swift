@@ -12,9 +12,23 @@ import SnapKit
 
 class CalendarViewController: BasicController {
     
+    // MARK: - Properties
+    
+    private var viewModel: CalendarViewModel
+
+    
     // MARK: - Components
     
     private var calendar = CalendarView()
+    
+    init(viewModel: CalendarViewModel) {
+        self.viewModel = viewModel
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 // MARK: - Life Cycle
@@ -46,8 +60,7 @@ private extension CalendarViewController {
 extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegateAppearance {
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-        print(date)
-        return 1
+        return viewModel.isEventDay(date: date) ? 1 : 0
     }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {

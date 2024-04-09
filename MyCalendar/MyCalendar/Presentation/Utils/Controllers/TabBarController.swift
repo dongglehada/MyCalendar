@@ -25,7 +25,7 @@ private extension TabBarController {
             selectedImage: UIImage(systemName: "list.bullet")
         )
         
-        let calendarVC = UINavigationController(rootViewController: CalendarViewController())
+        let calendarVC = UINavigationController(rootViewController: CalendarViewController(viewModel: CalendarViewModel(sqliteRepository: SQLiteRepositorie())))
         calendarVC.tabBarItem = UITabBarItem(
             title: "Calendar",
             image: UIImage(systemName: "calendar"),

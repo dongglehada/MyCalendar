@@ -32,6 +32,8 @@
 		08B9122E2BBAEE1200F0678E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9122D2BBAEE1200F0678E /* Colors.swift */; };
 		08B912302BBAEE8600F0678E /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9122F2BBAEE8600F0678E /* UILabel+.swift */; };
 		08B912322BBAEE9400F0678E /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B912312BBAEE9400F0678E /* UIColor+.swift */; };
+		08BDE23D2BC59A580031B6C6 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BDE23C2BC59A580031B6C6 /* CalendarViewModel.swift */; };
+		08BDE23F2BC59B290031B6C6 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BDE23E2BC59B290031B6C6 /* CalendarView.swift */; };
 		08EF83BC2BBA909B004BE32F /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF83BB2BBA909B004BE32F /* Memo.swift */; };
 		08EF83C62BBA936C004BE32F /* SQLiteRepositorie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF83C52BBA936C004BE32F /* SQLiteRepositorie.swift */; };
 		08EF83C82BBA9F2C004BE32F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EF83C72BBA9F2C004BE32F /* TabBarController.swift */; };
@@ -62,6 +64,8 @@
 		08B9122D2BBAEE1200F0678E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		08B9122F2BBAEE8600F0678E /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		08B912312BBAEE9400F0678E /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		08BDE23C2BC59A580031B6C6 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		08BDE23E2BC59B290031B6C6 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		08EF83BB2BBA909B004BE32F /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		08EF83C52BBA936C004BE32F /* SQLiteRepositorie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteRepositorie.swift; sourceTree = "<group>"; };
 		08EF83C72BBA9F2C004BE32F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				0848DEDE2BBA89B8009E3BC3 /* CalendarViewController.swift */,
+				08BDE23E2BC59B290031B6C6 /* CalendarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,6 +274,7 @@
 		08EF83C02BBA91B2004BE32F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				08BDE23C2BC59A580031B6C6 /* CalendarViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -410,10 +416,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08BDE23D2BC59A580031B6C6 /* CalendarViewModel.swift in Sources */,
 				085FE6B92BBBE55A00F94825 /* MemoDetailViewModel.swift in Sources */,
 				0848DEDF2BBA89B8009E3BC3 /* CalendarViewController.swift in Sources */,
 				08EF83D32BBAB164004BE32F /* SQLiteRepositorieProtocol.swift in Sources */,
 				0835D75E2BBC43CF00CB07A7 /* GetMemoToSQLiteUseCase.swift in Sources */,
+				08BDE23F2BC59B290031B6C6 /* CalendarView.swift in Sources */,
 				0866E9532BBD918700583BAC /* DeleteMemoToSQLiteUseCase.swift in Sources */,
 				08B912232BBAE48500F0678E /* UITableViewCell+.swift in Sources */,
 				0848DEDB2BBA89B8009E3BC3 /* AppDelegate.swift in Sources */,

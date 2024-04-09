@@ -12,29 +12,47 @@ import SnapKit
 
 class CalendarViewController: BasicController {
     
-    var calendar: FSCalendar = {
-        let calendar = FSCalendar()
-        calendar.firstWeekday = 2
-        calendar.scope = .month
-        calendar.appearance.titleDefaultColor = .white
-        return calendar
-    }()
+    // MARK: - Components
     
+    private var calendar = CalendarView()
+}
+
+// MARK: - Life Cycle
+extension CalendarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        setUp()
+        setUpUI()
+    }
+}
+
+// MARK: - SetUp
+private extension CalendarViewController {
+    
+    func setUp() {
+        calendar.delegate = self
+        calendar.dataSource = self
+    }
+    
+    func setUpUI() {
         view.addSubview(calendar)
         
         calendar.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
     }
 }
 
-extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource {
+extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegateAppearance {
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        print(date)
+        return 1
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
+        return [.getColor(color: .pointColor)]
+    }
     
 }
 

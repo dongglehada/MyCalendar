@@ -21,6 +21,11 @@ class CalendarViewController: BasicController {
     
     private var calendar = CalendarView()
     
+    private var memoTableView: UITableView = {
+        let view = UITableView(frame: .zero, style: .plain)
+        return view
+    }()
+    
     init(viewModel: CalendarViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -50,9 +55,16 @@ private extension CalendarViewController {
     
     func setUpUI() {
         view.addSubview(calendar)
+        view.addSubview(memoTableView)
         
         calendar.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(Constants.screenHeight / 2)
+        }
+        
+        memoTableView.snp.makeConstraints { make in
+            make.top.equalTo(calendar.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 }

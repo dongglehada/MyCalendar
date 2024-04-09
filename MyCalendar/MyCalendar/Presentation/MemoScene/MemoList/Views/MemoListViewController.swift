@@ -108,7 +108,7 @@ private extension MemoListViewController {
         output.moveToMemoDetailVC
             .withUnretained(self)
             .subscribe(onNext: { (owner ,memo) in
-                let vm = MemoDetailViewModel(sqlLiteRepository: SQLiteRepositorie())
+                let vm = MemoDetailViewModel(sqlLiteRepository: SQLiteRepositorie.shared)
                 vm.displayMemo(memo: memo)
                 let vc = MemoDetailViewController(viewModel: vm)
                 owner.navigationController?.pushViewController(vc, animated: true)
@@ -118,7 +118,7 @@ private extension MemoListViewController {
         output.moveToMemoAddVC
             .emit { [weak self] _ in
                 guard let self = self else { return }
-                self.navigationController?.pushViewController(MemoDetailViewController(viewModel: MemoDetailViewModel(sqlLiteRepository: SQLiteRepositorie())), animated: true)
+                self.navigationController?.pushViewController(MemoDetailViewController(viewModel: MemoDetailViewModel(sqlLiteRepository: SQLiteRepositorie.shared)), animated: true)
             }
             .disposed(by: disposeBag)
         

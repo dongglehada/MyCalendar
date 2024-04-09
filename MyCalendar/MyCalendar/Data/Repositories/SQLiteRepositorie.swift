@@ -13,8 +13,9 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
     
     var db: OpaquePointer?
     var path = "mySqlite.sqlite"
+    static var shared = SQLiteRepositorie()
     
-    init() {
+    private init() {
         self.db = createDB()
         createTable()
         print(self, "init")

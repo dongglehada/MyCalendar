@@ -18,14 +18,14 @@ final class TabBarController: UITabBarController {
 private extension TabBarController {
     func setUp() {
         
-        let memoVC = UINavigationController(rootViewController: MemoListViewController(viewModel: MemoListViewModel(sqlLiteRepository: SQLiteRepositorie())))
+        let memoVC = UINavigationController(rootViewController: MemoListViewController(viewModel: MemoListViewModel(sqlLiteRepository: SQLiteRepositorie.shared)))
         memoVC.tabBarItem = UITabBarItem(
             title: "Memo",
             image: UIImage(systemName: "list.bullet"),
             selectedImage: UIImage(systemName: "list.bullet")
         )
         
-        let calendarVC = UINavigationController(rootViewController: CalendarViewController(viewModel: CalendarViewModel(sqliteRepository: SQLiteRepositorie())))
+        let calendarVC = UINavigationController(rootViewController: CalendarViewController(viewModel: CalendarViewModel(sqliteRepository: SQLiteRepositorie.shared)))
         calendarVC.tabBarItem = UITabBarItem(
             title: "Calendar",
             image: UIImage(systemName: "calendar"),

@@ -10,6 +10,9 @@ import UIKit
 import FSCalendar
 import SnapKit
 
+import RxSwift
+import RxCocoa
+
 class CalendarViewController: BasicController {
     
     // MARK: - Properties
@@ -43,6 +46,10 @@ extension CalendarViewController {
         setUp()
         setUpUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.isRunViewWillAppear(isRun: true)
+    }
 }
 
 // MARK: - SetUp
@@ -67,6 +74,13 @@ private extension CalendarViewController {
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
+    
+    func setUpBind() {
+        var input = CalendarViewModel.Input(
+            didSelectDate: viewModel.selectedDate.asObservable(),
+            viewWillAppear: viewModel.viewWillAppear.asObservable()
+        )
+    }
 }
 
 extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -77,6 +91,10 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegateAppear
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
         return [.getColor(color: .pointColor)]
+    }
+    
+    func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        viewModel.didSelectedDate(date: date)
     }
     
 }

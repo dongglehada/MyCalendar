@@ -16,7 +16,7 @@ class MemoDetailViewModel: ViewModelProtocol {
     struct Input {
         let viewWillDisappear: Observable<Bool>
         let didTapPinButton: Signal<Void>
-        let didTapCalendarButton: ControlEvent<Void>
+        let didTapCalendarButton: Signal<Void>
         let didChangeTitle: Observable<String>
         let didChangeMemo: Observable<String>
     }
@@ -24,6 +24,7 @@ class MemoDetailViewModel: ViewModelProtocol {
     struct Output {
         let isPin: Observable<Bool>
         let loadMemo: Observable<Memo>
+        let didTapCalendarButton: Observable<Memo>
     }
     
     func transform(input: Input) -> Output {
@@ -60,9 +61,16 @@ class MemoDetailViewModel: ViewModelProtocol {
             })
             .asObservable()
 
+        let didTapCalendarButton = input.didTapCalendarButton
+            .withUnretained(self)
+            .map { (owner, _) in
+                owner.memo
+            }
+            .asObservable()
         return Output(
             isPin: isPin,
-            loadMemo: displayMemo.asObservable()
+            loadMemo: displayMemo.asObservable(),
+            didTapCalendarButton: didTapCalendarButton
         )
     }
     
@@ -97,5 +105,14 @@ class MemoDetailViewModel: ViewModelProtocol {
     
     func displayMemo(memo: Memo) {
         displayMemo.accept(memo)
+    }
+    
+    func setCalendarDate(date: Date?) {
+        self.memo.calendarDate = date
+        self.reloadView()
+    }
+    
+    func reloadView() {
+        displayMemo(memo: self.memo)
     }
 }

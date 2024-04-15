@@ -50,6 +50,11 @@ class MemoDetailViewController: BasicController {
         return view
     }()
     
+    private let datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        return picker
+    }()
+    
     init(viewModel: MemoDetailViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -106,7 +111,7 @@ private extension MemoDetailViewController {
         let input = MemoDetailViewModel.Input(
             viewWillDisappear: viewModel.viewWillDisappear.asObservable(),
             didTapPinButton: navigationPinButton.rx.tap.asSignal(),
-            didTapCalendarButton: navigationCalendarButton.rx.tap,
+            didTapCalendarButton: navigationCalendarButton.rx.tap.asSignal(),
             didChangeTitle: titleTextField.rx.text.orEmpty.asObservable(),
             didChangeMemo: textView.rx.text.orEmpty.asObservable()
         )
@@ -130,13 +135,43 @@ private extension MemoDetailViewController {
                 owner.viewModel.setMemo(memo: memo)
                 owner.titleTextField.text = memo.title
                 owner.textView.text = memo.memo
-                if memo.isPin {
-                    owner.navigationPinButton.tintColor = .getColor(color: .pointColor)
-                } else {
-                    owner.navigationPinButton.tintColor = .getColor(color: .gray)
-                }
+                owner.setPinButtonColor(isPin: memo.isPin)
+                owner.setCalendarButtonColor(date: memo.calendarDate)
             }
             .disposed(by: disposeBag)
+        
+        output.didTapCalendarButton
+            .withUnretained(self)
+            .subscribe { (owner, memo) in
+                let alert = UIAlertController(title: "날짜 고르기", message: "날짜를 골라주세요", preferredStyle: .actionSheet)
+                let datePicker = UIDatePicker()
+                datePicker.datePickerMode = .date
+                datePicker.preferredDatePickerStyle = .wheels
+                datePicker.locale = Locale(identifier: "ko_KR")
+                
+                if memo.calendarDate != nil {
+                    datePicker.date = memo.calendarDate!
+                }
+                
+                let ok = UIAlertAction(title: "선택 완료", style: .cancel) { _ in
+                    owner.viewModel.setCalendarDate(date: datePicker.date)
+                }
+                
+
+                let cancel = UIAlertAction(title: "날짜 삭제", style: .default) { _ in
+                    owner.viewModel.setCalendarDate(date: nil)
+                }
+                
+                alert.addAction(ok)
+                alert.addAction(cancel)
+                        
+                let vc = UIViewController()
+                vc.view = datePicker
+                        
+                alert.setValue(vc, forKey: "contentViewController")
+                        
+                owner.present(alert, animated: true)
+            }.disposed(by: disposeBag)
     }
     
     func setUpNavigation() {
@@ -146,5 +181,24 @@ private extension MemoDetailViewController {
             UIBarButtonItem(customView: navigationCalendarButton)
         ]
         navigationItem.titleView = titleTextField
+    }
+}
+
+// MARK: - Methods
+private extension MemoDetailViewController {
+    func setPinButtonColor(isPin: Bool) {
+        if isPin {
+            navigationPinButton.tintColor = .getColor(color: .pointColor)
+        } else {
+            navigationPinButton.tintColor = .getColor(color: .gray)
+        }
+    }
+    
+    func setCalendarButtonColor(date: Date?) {
+        if date == nil {
+            navigationCalendarButton.tintColor = .getColor(color: .gray)
+        } else {
+            navigationCalendarButton.tintColor = .getColor(color: .pointColor)
+        }
     }
 }

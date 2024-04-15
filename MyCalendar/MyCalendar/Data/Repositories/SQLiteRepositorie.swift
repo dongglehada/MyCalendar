@@ -116,30 +116,6 @@ class SQLiteRepositorie: SQLiteRepositorieProtocol {
         sqlite3_finalize(statement)
         return result
     }
-    
-    func getMemo(date: Date) -> [Memo] {
-        let query = "select * from myDB where calendarDate = \(date.description)"
-        var statement: OpaquePointer? = nil
-        var result: [Memo] = []
-        
-        if sqlite3_prepare_v2(self.db, query, -1, &statement, nil) == SQLITE_OK {
-            while sqlite3_step(statement) == SQLITE_ROW {
-                let id = sqlite3_column_int(statement, 0)
-                let memoData = String(cString: sqlite3_column_text(statement, 1))
-                do {
-                    var data = try JSONDecoder().decode(Memo.self, from: memoData.data(using: .utf8)!)
-                    data.id = id
-                    result.append(data)
-                } catch {
-                    print("JSONDecoder Error")
-                }
-            }
-        } else {
-            print("read Data prepare fail")
-        }
-        sqlite3_finalize(statement)
-        return result
-    }
 
     func updateMemo(memo: Memo) {
         do {

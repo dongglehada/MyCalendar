@@ -13,7 +13,6 @@ protocol SQLiteRepositorieProtocol {
     func deleteTable()
     func insertMemo(memo: Memo)
     func getMemo() -> [Memo]
-    func getMemo(date: Date) -> [Memo]
     func updateMemo(memo: Memo)
     func deleteMemo(memo: Memo)
 }

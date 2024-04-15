@@ -61,9 +61,9 @@ extension MemoListViewController {
         setUpBind()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        viewModel.isRunViewWillAppear(isRun: true)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        viewModel.isRunViewWillAppear(isRun: true)
+//    }
 }
 
 // MARK: - SetUp
@@ -96,7 +96,7 @@ private extension MemoListViewController {
     func setUpBind() {
         
         let input = MemoListViewModel.Input(
-            viewWillAppear: viewModel.viewWillAppear.asObservable(),
+            viewWillAppear: self.rx.viewWillAppear,
             didTapNavigationEditButton: navigationMemoAddButton.rx.tap.asSignal(),
             didTapNavigationDeleteButton: navigationMemoEditButton.rx.tap.asSignal(),
             didTapMemoCell: memoTableView.rx.itemSelected.asSignal(),
@@ -142,7 +142,7 @@ private extension MemoListViewController {
                 guard let self = self else { return }
                 let memo = viewModel.getMemo()[indexPath.row]
                 self.viewModel.deleteMemo(memo: memo)
-                self.viewModel.memoTableViewReload()
+                self.viewWillAppear(true)
             }
             .disposed(by: disposeBag)
     }

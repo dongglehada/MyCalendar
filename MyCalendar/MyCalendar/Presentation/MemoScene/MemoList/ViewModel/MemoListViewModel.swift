@@ -17,7 +17,7 @@ class MemoListViewModel: ViewModelProtocol {
     var disposeBag = DisposeBag()
     
     struct Input {
-        let viewWillAppear: Observable<Bool>
+        let viewWillAppear: ControlEvent<Void>
         let didTapNavigationEditButton: Signal<Void>
         let didTapNavigationDeleteButton: Signal<Void>
         let didTapMemoCell: Signal<IndexPath>
@@ -56,8 +56,6 @@ class MemoListViewModel: ViewModelProtocol {
         )
     }
     
-    let viewWillAppear = BehaviorRelay<Bool>(value: false)
-    
     // MARK: - Repository
     private let sqliteRepository: SQLiteRepositorieProtocol
     
@@ -69,14 +67,6 @@ class MemoListViewModel: ViewModelProtocol {
         self.sqliteRepository = sqlLiteRepository
         self.getMemoToSQLiteUseCase = DefaultGetMemoToSQLiteUseCase(repository: sqliteRepository)
         self.deleteMemoToSQLiteUseCase = DefaultDeleteMemoToSQLiteUseCase(repository: sqlLiteRepository)
-    }
-    
-    func isRunViewWillAppear(isRun: Bool) {
-        viewWillAppear.accept(isRun)
-    }
-    
-    func memoTableViewReload() {
-        viewWillAppear.accept(true)
     }
     
     func deleteMemo(memo: Memo) {

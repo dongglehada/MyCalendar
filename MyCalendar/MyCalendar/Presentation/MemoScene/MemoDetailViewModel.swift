@@ -14,7 +14,7 @@ class MemoDetailViewModel: ViewModelProtocol {
     var disposeBag = DisposeBag()
     
     struct Input {
-        let viewWillDisappear: Observable<Bool>
+        let viewWillDisappear: ControlEvent<Void>
         let didTapPinButton: Signal<Void>
         let didTapCalendarButton: Signal<Void>
         let didChangeTitle: Observable<String>
@@ -31,11 +31,9 @@ class MemoDetailViewModel: ViewModelProtocol {
         
         input.viewWillDisappear
             .withUnretained(self)
-            .subscribe { (owner, isRun) in
-                if isRun {
-                    owner.memo.updateDate = Date.now
-                    owner.updateMemoToSQLiteUseCase.excute(memo: owner.memo)
-                }
+            .subscribe { (owner, _) in
+                owner.memo.updateDate = Date.now
+                owner.updateMemoToSQLiteUseCase.excute(memo: owner.memo)
             }
             .disposed(by: disposeBag)
         
@@ -74,10 +72,6 @@ class MemoDetailViewModel: ViewModelProtocol {
         )
     }
     
-    let viewWillAppear = BehaviorRelay<Bool>(value: false)
-    
-    let viewWillDisappear = BehaviorRelay<Bool>(value: false)
-    
     private var memo = Memo(id: 0, updateDate: Date.now, title: "", memo: "", isPin: false)
     
     private var displayMemo = BehaviorRelay(value: Memo(id: 0, updateDate: Date.now, title: "", memo: "", isPin: false))
@@ -89,14 +83,6 @@ class MemoDetailViewModel: ViewModelProtocol {
     init(sqlLiteRepository: SQLiteRepositorieProtocol) {
         self.sqlLiteRepository = sqlLiteRepository
         self.updateMemoToSQLiteUseCase = DefaultUpdateMemoToSQLiteUseCase(repository: sqlLiteRepository)
-    }
-    
-    func isRunViewWillDisappear(isRun: Bool) {
-        viewWillDisappear.accept(isRun)
-    }
-    
-    func isRunViewWillAppear(isRun: Bool) {
-        viewWillAppear.accept(isRun)
     }
     
     func setMemo(memo: Memo) {

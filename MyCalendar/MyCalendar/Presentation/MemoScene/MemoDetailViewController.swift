@@ -78,12 +78,10 @@ extension MemoDetailViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-        viewModel.isRunViewWillAppear(isRun: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
-        viewModel.isRunViewWillDisappear(isRun: true)
     }
 }
 
@@ -109,7 +107,7 @@ private extension MemoDetailViewController {
     func setUpBind() {
         
         let input = MemoDetailViewModel.Input(
-            viewWillDisappear: viewModel.viewWillDisappear.asObservable(),
+            viewWillDisappear: self.rx.viewWillDisappear,
             didTapPinButton: navigationPinButton.rx.tap.asSignal(),
             didTapCalendarButton: navigationCalendarButton.rx.tap.asSignal(),
             didChangeTitle: titleTextField.rx.text.orEmpty.asObservable(),

@@ -21,7 +21,7 @@ class DefaultGetMemoToSQLiteUseCase: GetMemoToSQLiteUseCase {
     
     func excute() -> [Memo] {
         
-        let sortedMemos = repository.getData().sorted { first, second in
+        let sortedMemos = repository.getMemo().sorted { first, second in
             return first.updateDate > second.updateDate
         }
         

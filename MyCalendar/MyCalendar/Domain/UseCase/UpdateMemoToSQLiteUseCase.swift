@@ -21,7 +21,7 @@ class DefaultUpdateMemoToSQLiteUseCase: UpdateMemoToSQLiteUseCase {
     }
     
     func excute(memo: Memo) {
-        if repository.getData().map({$0.id}).contains(memo.id) {
+        if repository.getMemo().map({$0.id}).contains(memo.id) {
             repository.updateMemo(memo: memo)
         } else {
             repository.insertMemo(memo: memo)

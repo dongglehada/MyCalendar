@@ -60,10 +60,6 @@ extension MemoListViewController {
         setUpNavigation()
         setUpBind()
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        viewModel.isRunViewWillAppear(isRun: true)
-//    }
 }
 
 // MARK: - SetUp

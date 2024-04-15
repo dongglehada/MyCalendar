@@ -19,6 +19,7 @@ class CalendarViewController: BasicController {
     
     private var viewModel: CalendarViewModel
 
+    private var disposeBag = DisposeBag()
     
     // MARK: - Components
     
@@ -45,10 +46,11 @@ extension CalendarViewController {
         super.viewDidLoad()
         setUp()
         setUpUI()
+        setUpBind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.isRunViewWillAppear(isRun: true)
+        calendar.reloadData()
     }
 }
 
@@ -58,6 +60,8 @@ private extension CalendarViewController {
     func setUp() {
         calendar.delegate = self
         calendar.dataSource = self
+        memoTableView.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.identifier)
+        navigationController?.navigationBar.tintColor = .getColor(color: .pointColor)
     }
     
     func setUpUI() {
@@ -76,10 +80,30 @@ private extension CalendarViewController {
     }
     
     func setUpBind() {
-        var input = CalendarViewModel.Input(
-            didSelectDate: viewModel.selectedDate.asObservable(),
-            viewWillAppear: viewModel.viewWillAppear.asObservable()
+        let input = CalendarViewModel.Input(
+            selectedDate: viewModel.selectedDate.asObservable(),
+            viewWillAppear: self.rx.viewWillAppear,
+            didTapMemoCell: memoTableView.rx.itemSelected.asSignal()
         )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.loadToMemoDatas
+            .bind(to: memoTableView.rx.items(cellIdentifier: MemoListTableViewCell.identifier)) { (index: Int, element: Memo, cell: MemoListTableViewCell) in
+                cell.bind(memo: element)
+                cell.selectionStyle = .none
+            }
+            .disposed(by: disposeBag)
+        
+        output.moveToMemoDetailVC
+            .withUnretained(self)
+            .subscribe { (owner, memo) in
+                let vm = MemoDetailViewModel(sqlLiteRepository: SQLiteRepositorie.shared)
+                vm.displayMemo(memo: memo)
+                let vc = MemoDetailViewController(viewModel: vm)
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -93,9 +117,7 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegateAppear
         return [.getColor(color: .pointColor)]
     }
     
-    func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         viewModel.didSelectedDate(date: date)
     }
-    
 }
-

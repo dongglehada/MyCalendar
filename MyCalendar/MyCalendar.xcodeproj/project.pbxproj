@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		081EB6D62BCCEC350073DF77 /* Reactive+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081EB6D52BCCEC350073DF77 /* Reactive+.swift */; };
 		0835D75C2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835D75B2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift */; };
 		0835D75E2BBC43CF00CB07A7 /* GetMemoToSQLiteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835D75D2BBC43CF00CB07A7 /* GetMemoToSQLiteUseCase.swift */; };
 		0848DEDB2BBA89B8009E3BC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0848DEDA2BBA89B8009E3BC3 /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		081EB6D52BCCEC350073DF77 /* Reactive+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+.swift"; sourceTree = "<group>"; };
 		0835D75B2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMemoToSQLiteUseCase.swift; sourceTree = "<group>"; };
 		0835D75D2BBC43CF00CB07A7 /* GetMemoToSQLiteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMemoToSQLiteUseCase.swift; sourceTree = "<group>"; };
 		0848DED72BBA89B8009E3BC3 /* MyCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,6 +229,7 @@
 				08B912222BBAE48500F0678E /* UITableViewCell+.swift */,
 				08B9122F2BBAEE8600F0678E /* UILabel+.swift */,
 				08B912312BBAEE9400F0678E /* UIColor+.swift */,
+				081EB6D52BCCEC350073DF77 /* Reactive+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				08EF83BC2BBA909B004BE32F /* Memo.swift in Sources */,
 				08B9122C2BBAEB7F00F0678E /* Fonts.swift in Sources */,
 				08EF83CD2BBAA1B7004BE32F /* BasicController.swift in Sources */,
+				081EB6D62BCCEC350073DF77 /* Reactive+.swift in Sources */,
 				08B9122A2BBAEAC300F0678E /* Constants.swift in Sources */,
 				08EF83C62BBA936C004BE32F /* SQLiteRepositorie.swift in Sources */,
 				08B912282BBAE7D700F0678E /* MemoListTableViewCell.swift in Sources */,

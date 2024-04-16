@@ -38,7 +38,6 @@ class MemoListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUp()
         setUpUI()
     }
 
@@ -51,10 +50,6 @@ class MemoListTableViewCell: UITableViewCell {
 
 // MARK: - SetUp
 private extension MemoListTableViewCell {
-    
-    func setUp() {
-        
-    }
     
     func setUpUI() {
         contentView.addSubview(pinImageView)

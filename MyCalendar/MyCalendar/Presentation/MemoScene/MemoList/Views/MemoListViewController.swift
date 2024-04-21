@@ -35,7 +35,7 @@ class MemoListViewController: BasicController {
     
     private let navigationMemoEditButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "pencil"), for: .normal)
+        button.setImage(UIImage(systemName: "trash"), for: .normal)
         button.setTitleColor(.getColor(color: .pointColor), for: .normal)
         button.titleLabel?.lineBreakMode = .byWordWrapping
         return button
@@ -126,7 +126,7 @@ private extension MemoListViewController {
                 guard let self = self else { return }
                 let isEditing = !self.memoTableView.isEditing
                 self.memoTableView.setEditing(isEditing, animated: true)
-                self.navigationMemoEditButton.setImage(isEditing ? UIImage(systemName: "checkmark") : UIImage(systemName: "pencil"), for: .normal)
+                self.navigationMemoEditButton.setImage(isEditing ? UIImage(systemName: "checkmark") : UIImage(systemName: "trash"), for: .normal)
             }
             .disposed(by: disposeBag)
         

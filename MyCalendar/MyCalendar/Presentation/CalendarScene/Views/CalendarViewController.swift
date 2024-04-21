@@ -39,7 +39,7 @@ class CalendarViewController: BasicController {
     
     private var memoEditButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "pencil"), for: .normal)
+        button.setImage(UIImage(systemName: "trash"), for: .normal)
         button.setTitleColor(.getColor(color: .pointColor), for: .normal)
         button.titleLabel?.lineBreakMode = .byWordWrapping
         return button
@@ -144,7 +144,7 @@ private extension CalendarViewController {
                 guard let self = self else { return }
                 let isEditing = !self.memoTableView.isEditing
                 self.memoTableView.setEditing(isEditing, animated: true)
-                self.memoEditButton.setImage(isEditing ? UIImage(systemName: "checkmark") : UIImage(systemName: "pencil"), for: .normal)
+                self.memoEditButton.setImage(isEditing ? UIImage(systemName: "checkmark") : UIImage(systemName: "trash"), for: .normal)
             }
             .disposed(by: disposeBag)
         

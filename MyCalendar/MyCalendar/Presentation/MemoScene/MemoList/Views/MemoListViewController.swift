@@ -77,6 +77,7 @@ private extension MemoListViewController {
     }
     
     func setUpNavigation() {
+        navigationController?.navigationBar.topItem?.title = "Memos"
         let emptyButton = UIBarButtonItem()
         self.navigationItem.rightBarButtonItems = [
             UIBarButtonItem(customView: navigationMemoAddButton),

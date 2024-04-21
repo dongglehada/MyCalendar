@@ -46,14 +46,13 @@ class CalendarViewController: BasicController {
         return button
     }()
     
-    private var calendarSwipeBar: UIButton = {
-        let button = UIButton()
-//        button.setBackgroundColor(.getColor(color: .gray), for: .normal)
-//        button.setBackgroundColor(.getColor(color: .pointColor), for: .selected)
-        button.backgroundColor = .getColor(color: .gray)
-        button.layer.cornerRadius = 5
-        button.isHidden = true
-        return button
+    private var calendarSwipeBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = .getColor(color: .gray)
+        view.layer.cornerRadius = 5
+        view.isHidden = true
+        view.isUserInteractionEnabled = false
+        return view
     }()
     
     init(viewModel: CalendarViewModel) {
@@ -74,6 +73,7 @@ extension CalendarViewController {
         setUpUI()
         setUpBind()
         setUpGesture()
+        setUpNavigation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,7 +88,10 @@ private extension CalendarViewController {
         calendar.delegate = self
         calendar.dataSource = self
         memoTableView.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.identifier)
-        
+    }
+    
+    func setUpNavigation() {
+        navigationController?.navigationBar.topItem?.title = "Calendar"
         let emptyButton = UIBarButtonItem()
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(customView: memoAddButton),
@@ -108,7 +111,7 @@ private extension CalendarViewController {
         }
         
         calendarSwipeBar.snp.makeConstraints { make in
-            make.top.equalTo(calendar.snp.bottom)
+            make.bottom.equalTo(calendar.snp.bottom).inset(5)
             make.centerX.equalToSuperview()
             make.width.equalTo(100)
             make.height.equalTo(10)
@@ -127,7 +130,7 @@ private extension CalendarViewController {
         
         let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.didSwipecalendar(_:)))
         swipeDownGesture.direction = .down
-        calendarSwipeBar.addGestureRecognizer(swipeDownGesture)
+        calendar.addGestureRecognizer(swipeDownGesture)
     }
     
     @objc
@@ -196,7 +199,6 @@ private extension CalendarViewController {
                 self.viewWillAppear(true)
             }
             .disposed(by: disposeBag)
-        
     }
 }
 

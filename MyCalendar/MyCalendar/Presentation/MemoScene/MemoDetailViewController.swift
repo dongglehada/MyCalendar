@@ -36,9 +36,6 @@ class MemoDetailViewController: BasicController {
         return button
     }()
     
-    
-    private let titleTextFieldTrailingView = UIView()
-    
     private let titleTextField: UITextField = {
         let view = UITextField()
         view.font = Fonts.lg.boldFont
@@ -96,18 +93,14 @@ private extension MemoDetailViewController {
     
     func setUpUI() {
         view.addSubview(textView)
-        titleTextFieldTrailingView.addSubview(titleTextField)
+        
         textView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide).inset(Constants.spacings.md)
         }
         
-        titleTextFieldTrailingView.snp.makeConstraints { make in
+        titleTextField.snp.makeConstraints { make in
             make.width.equalTo(Constants.screenWidth / 2)
             make.height.equalTo(Constants.spacings.xl)
-        }
-        
-        titleTextField.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
         }
     }
     
@@ -185,7 +178,7 @@ private extension MemoDetailViewController {
             UIBarButtonItem(customView: navigationPinButton),
             UIBarButtonItem(customView: navigationCalendarButton)
         ]
-        navigationItem.titleView = titleTextFieldTrailingView
+        navigationItem.titleView = titleTextField
     }
 }
 

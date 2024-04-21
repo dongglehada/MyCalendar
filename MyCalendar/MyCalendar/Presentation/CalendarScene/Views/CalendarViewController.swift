@@ -27,6 +27,7 @@ class CalendarViewController: BasicController {
     
     private var memoTableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
+        view.isHidden = true
         return view
     }()
     
@@ -42,6 +43,16 @@ class CalendarViewController: BasicController {
         button.setImage(UIImage(systemName: "trash"), for: .normal)
         button.setTitleColor(.getColor(color: .pointColor), for: .normal)
         button.titleLabel?.lineBreakMode = .byWordWrapping
+        return button
+    }()
+    
+    private var calendarSwipeBar: UIButton = {
+        let button = UIButton()
+//        button.setBackgroundColor(.getColor(color: .gray), for: .normal)
+//        button.setBackgroundColor(.getColor(color: .pointColor), for: .selected)
+        button.backgroundColor = .getColor(color: .gray)
+        button.layer.cornerRadius = 5
+        button.isHidden = true
         return button
     }()
     
@@ -62,6 +73,7 @@ extension CalendarViewController {
         setUp()
         setUpUI()
         setUpBind()
+        setUpGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,16 +100,43 @@ private extension CalendarViewController {
     
     func setUpUI() {
         view.addSubview(calendar)
+        view.addSubview(calendarSwipeBar)
         view.addSubview(memoTableView)
         
         calendar.snp.makeConstraints { make in
-            make.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(Constants.screenHeight / 2)
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        calendarSwipeBar.snp.makeConstraints { make in
+            make.top.equalTo(calendar.snp.bottom)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(100)
+            make.height.equalTo(10)
         }
         
         memoTableView.snp.makeConstraints { make in
-            make.top.equalTo(calendar.snp.bottom)
+            make.top.equalTo(calendarSwipeBar.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    func setUpGesture() {
+        let swipeUpGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.didSwipecalendar(_:)))
+        swipeUpGesture.direction = .up
+        calendar.addGestureRecognizer(swipeUpGesture)
+        
+        let swipeDownGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.didSwipecalendar(_:)))
+        swipeDownGesture.direction = .down
+        calendarSwipeBar.addGestureRecognizer(swipeDownGesture)
+    }
+    
+    @objc
+    func didSwipecalendar(_ gesture: UISwipeGestureRecognizer) {
+        
+        if gesture.direction == .up {
+            calendar.setScope(.week, animated: true)
+        } else if gesture.direction == .down {
+            calendar.setScope(.month, animated: true)
         }
     }
     
@@ -173,5 +212,27 @@ extension CalendarViewController: FSCalendarDataSource, FSCalendarDelegateAppear
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         viewModel.didSelectedDate(date: date)
+        calendar.setScope(.week, animated: true)
+    }
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        if calendar.scope == .month {
+            calendar.snp.remakeConstraints { make in
+                make.edges.equalTo(view.safeAreaLayoutGuide)
+            }
+        } else if calendar.scope == .week {
+            calendar.snp.remakeConstraints { make in
+                make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+                make.height.equalTo(Constants.screenHeight / 4)
+            }
+        }
+        
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        } completion: { [weak self] _ in
+            self?.calendarSwipeBar.isHidden.toggle()
+            self?.memoTableView.isHidden.toggle()
+        }
     }
 }
+

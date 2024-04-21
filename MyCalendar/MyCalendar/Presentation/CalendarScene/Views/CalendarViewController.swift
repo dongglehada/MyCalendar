@@ -30,6 +30,21 @@ class CalendarViewController: BasicController {
         return view
     }()
     
+    private var memoAddButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.setTitleColor(.getColor(color: .pointColor), for: .normal)
+        return button
+    }()
+    
+    private var memoEditButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "pencil"), for: .normal)
+        button.setTitleColor(.getColor(color: .pointColor), for: .normal)
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        return button
+    }()
+    
     init(viewModel: CalendarViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -61,6 +76,13 @@ private extension CalendarViewController {
         calendar.delegate = self
         calendar.dataSource = self
         memoTableView.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.identifier)
+        
+        let emptyButton = UIBarButtonItem()
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(customView: memoAddButton),
+            emptyButton,
+            UIBarButtonItem(customView: memoEditButton)
+        ]
         navigationController?.navigationBar.tintColor = .getColor(color: .pointColor)
     }
     
@@ -83,7 +105,10 @@ private extension CalendarViewController {
         let input = CalendarViewModel.Input(
             selectedDate: viewModel.selectedDate.asObservable(),
             viewWillAppear: self.rx.viewWillAppear,
-            didTapMemoCell: memoTableView.rx.itemSelected.asSignal()
+            didTapMemoCell: memoTableView.rx.itemSelected.asSignal(),
+            didTapNavigationAddButton: memoAddButton.rx.tap.asSignal(),
+            didTapNavigationEditButton: memoEditButton.rx.tap.asSignal(),
+            didDeleteMemo: memoTableView.rx.itemDeleted.asSignal()
         )
         
         let output = viewModel.transform(input: input)
@@ -104,6 +129,35 @@ private extension CalendarViewController {
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        output.moveToMemoAddVC
+            .emit { [weak self] _ in
+                guard let self = self else { return }
+                let viewModel = MemoDetailViewModel(sqlLiteRepository: SQLiteRepositorie.shared)
+                viewModel.setCalendarDate(date: calendar.selectedDate)
+                self.navigationController?.pushViewController(MemoDetailViewController(viewModel: viewModel), animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        output.changeEditMode
+            .emit { [weak self] _ in
+                guard let self = self else { return }
+                let isEditing = !self.memoTableView.isEditing
+                self.memoTableView.setEditing(isEditing, animated: true)
+                self.memoEditButton.setImage(isEditing ? UIImage(systemName: "checkmark") : UIImage(systemName: "pencil"), for: .normal)
+            }
+            .disposed(by: disposeBag)
+        
+        output.deleteMemo
+            .emit { [weak self] indexPath in
+                guard let self = self else { return }
+                guard let date = self.calendar.selectedDate else { return }
+                let memo = viewModel.getMemo(date: date)[indexPath.row]
+                self.viewModel.deleteMemo(memo: memo)
+                self.viewWillAppear(true)
+            }
+            .disposed(by: disposeBag)
+        
     }
 }
 

@@ -28,14 +28,14 @@ class MemoListViewController: BasicController {
     
     private let navigationMemoAddButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Add", for: .normal)
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.setTitleColor(.getColor(color: .pointColor), for: .normal)
         return button
     }()
     
     private let navigationMemoEditButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Edit ", for: .normal)
+        button.setImage(UIImage(systemName: "pencil"), for: .normal)
         button.setTitleColor(.getColor(color: .pointColor), for: .normal)
         button.titleLabel?.lineBreakMode = .byWordWrapping
         return button
@@ -74,9 +74,6 @@ private extension MemoListViewController {
         memoTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        navigationMemoEditButton.snp.makeConstraints { make in
-            make.width.equalTo(50)
-        }
     }
     
     func setUpNavigation() {
@@ -86,15 +83,15 @@ private extension MemoListViewController {
             emptyButton,
             UIBarButtonItem(customView: navigationMemoEditButton)
         ]
-        self.navigationController?.navigationBar.tintColor = .getColor(color: .pointColor)
+        navigationController?.navigationBar.tintColor = .getColor(color: .pointColor)
     }
     
     func setUpBind() {
         
         let input = MemoListViewModel.Input(
             viewWillAppear: self.rx.viewWillAppear,
-            didTapNavigationEditButton: navigationMemoAddButton.rx.tap.asSignal(),
-            didTapNavigationDeleteButton: navigationMemoEditButton.rx.tap.asSignal(),
+            didTapNavigationAddButton: navigationMemoAddButton.rx.tap.asSignal(),
+            didTapNavigationEditButton: navigationMemoEditButton.rx.tap.asSignal(),
             didTapMemoCell: memoTableView.rx.itemSelected.asSignal(),
             didDeleteMemo: memoTableView.rx.itemDeleted.asSignal()
         )
@@ -129,7 +126,7 @@ private extension MemoListViewController {
                 guard let self = self else { return }
                 let isEditing = !self.memoTableView.isEditing
                 self.memoTableView.setEditing(isEditing, animated: true)
-                self.navigationMemoEditButton.setTitle(isEditing ? "Done": " Edit ", for: .normal)
+                self.navigationMemoEditButton.setImage(isEditing ? UIImage(systemName: "checkmark") : UIImage(systemName: "pencil"), for: .normal)
             }
             .disposed(by: disposeBag)
         

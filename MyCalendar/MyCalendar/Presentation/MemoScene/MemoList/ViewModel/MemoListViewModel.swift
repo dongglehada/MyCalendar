@@ -18,8 +18,8 @@ class MemoListViewModel: ViewModelProtocol {
     
     struct Input {
         let viewWillAppear: ControlEvent<Void>
+        let didTapNavigationAddButton: Signal<Void>
         let didTapNavigationEditButton: Signal<Void>
-        let didTapNavigationDeleteButton: Signal<Void>
         let didTapMemoCell: Signal<IndexPath>
         let didDeleteMemo: Signal<IndexPath>
     }
@@ -49,9 +49,9 @@ class MemoListViewModel: ViewModelProtocol {
         
         return Output(
             moveToMemoDetailVC: moveToMemoDetailVC,
-            moveToMemoAddVC: input.didTapNavigationEditButton,
+            moveToMemoAddVC: input.didTapNavigationAddButton,
             loadToMemoDatas: loadToMemoDatas,
-            changeEditMode: input.didTapNavigationDeleteButton,
+            changeEditMode: input.didTapNavigationEditButton,
             deleteMemo: input.didDeleteMemo
         )
     }

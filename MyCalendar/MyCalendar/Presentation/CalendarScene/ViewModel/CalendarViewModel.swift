@@ -15,14 +15,20 @@ class CalendarViewModel: ViewModelProtocol {
     var disposeBag = DisposeBag()
     
     struct Input {
-        var selectedDate: Observable<Date>
-        var viewWillAppear: ControlEvent<Void>
+        let selectedDate: Observable<Date>
+        let viewWillAppear: ControlEvent<Void>
         let didTapMemoCell: Signal<IndexPath>
+        let didTapNavigationAddButton: Signal<Void>
+        let didTapNavigationEditButton: Signal<Void>
+        let didDeleteMemo: Signal<IndexPath>
     }
     
     struct Output {
-        var loadToMemoDatas: Observable<[Memo]>
+        let loadToMemoDatas: Observable<[Memo]>
+        let moveToMemoAddVC: Signal<Void>
         let moveToMemoDetailVC: Observable<Memo>
+        let changeEditMode: Signal<Void>
+        let deleteMemo: Signal<IndexPath>
     }
     
     
@@ -47,10 +53,13 @@ class CalendarViewModel: ViewModelProtocol {
             .subscribe { (owner, _) in
                 owner.selectedDate.accept(owner.selectedDate.value)
             }.disposed(by: disposeBag)
-        
+
         return Output(
             loadToMemoDatas: getMemoDatas,
-            moveToMemoDetailVC: selectedMemo
+            moveToMemoAddVC: input.didTapNavigationAddButton,
+            moveToMemoDetailVC: selectedMemo,
+            changeEditMode: input.didTapNavigationEditButton,
+            deleteMemo: input.didDeleteMemo
         )
     }
     
@@ -96,5 +105,9 @@ class CalendarViewModel: ViewModelProtocol {
     
     func didSelectedDate(date: Date) {
         selectedDate.accept(date)
+    }
+    
+    func deleteMemo(memo: Memo) {
+        deleteMemoToSQLiteUseCase.excute(memo: memo)
     }
 }

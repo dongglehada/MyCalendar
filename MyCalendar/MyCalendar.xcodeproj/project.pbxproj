@@ -25,6 +25,9 @@
 		085FE6B92BBBE55A00F94825 /* MemoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085FE6B82BBBE55A00F94825 /* MemoDetailViewModel.swift */; };
 		085FE6BC2BBBEE9700F94825 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 085FE6BB2BBBEE9700F94825 /* IQKeyboardManagerSwift */; };
 		0866E9532BBD918700583BAC /* DeleteMemoToSQLiteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0866E9522BBD918700583BAC /* DeleteMemoToSQLiteUseCase.swift */; };
+		08AAEDC92BEBB2330045074F /* DefaultUpdateMemoToSQLiteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AAEDC82BEBB2330045074F /* DefaultUpdateMemoToSQLiteUseCase.swift */; };
+		08AAEDCB2BEBB2580045074F /* DefaultGetMemoToSQLiteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AAEDCA2BEBB2580045074F /* DefaultGetMemoToSQLiteUseCase.swift */; };
+		08AAEDCD2BEBB26F0045074F /* DefaultDeleteMemoToSQLiteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AAEDCC2BEBB26F0045074F /* DefaultDeleteMemoToSQLiteUseCase.swift */; };
 		08B912232BBAE48500F0678E /* UITableViewCell+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B912222BBAE48500F0678E /* UITableViewCell+.swift */; };
 		08B912262BBAE53500F0678E /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B912252BBAE53500F0678E /* ViewModelProtocol.swift */; };
 		08B912282BBAE7D700F0678E /* MemoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B912272BBAE7D700F0678E /* MemoListTableViewCell.swift */; };
@@ -58,6 +61,9 @@
 		085FE6B22BBB0B6300F94825 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
 		085FE6B82BBBE55A00F94825 /* MemoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewModel.swift; sourceTree = "<group>"; };
 		0866E9522BBD918700583BAC /* DeleteMemoToSQLiteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMemoToSQLiteUseCase.swift; sourceTree = "<group>"; };
+		08AAEDC82BEBB2330045074F /* DefaultUpdateMemoToSQLiteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUpdateMemoToSQLiteUseCase.swift; sourceTree = "<group>"; };
+		08AAEDCA2BEBB2580045074F /* DefaultGetMemoToSQLiteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultGetMemoToSQLiteUseCase.swift; sourceTree = "<group>"; };
+		08AAEDCC2BEBB26F0045074F /* DefaultDeleteMemoToSQLiteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDeleteMemoToSQLiteUseCase.swift; sourceTree = "<group>"; };
 		08B912222BBAE48500F0678E /* UITableViewCell+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+.swift"; sourceTree = "<group>"; };
 		08B912252BBAE53500F0678E /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		08B912272BBAE7D700F0678E /* MemoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTableViewCell.swift; sourceTree = "<group>"; };
@@ -166,8 +172,8 @@
 		0848DF012BBA8AE5009E3BC3 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				0835D75A2BBC3FC100CB07A7 /* UseCase */,
-				08EF83D12BBAB135004BE32F /* RepositoryProtocol */,
+				08AAEDC72BEBB20D0045074F /* UseCase */,
+				08AAEDC62BEA67C20045074F /* Interfaces */,
 				0848DF032BBA8B2B009E3BC3 /* Entities */,
 			);
 			path = Domain;
@@ -221,6 +227,25 @@
 			);
 			name = ViewModel;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		08AAEDC62BEA67C20045074F /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				08EF83D12BBAB135004BE32F /* Repository */,
+				0835D75A2BBC3FC100CB07A7 /* UseCase */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		08AAEDC72BEBB20D0045074F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				08AAEDC82BEBB2330045074F /* DefaultUpdateMemoToSQLiteUseCase.swift */,
+				08AAEDCA2BEBB2580045074F /* DefaultGetMemoToSQLiteUseCase.swift */,
+				08AAEDCC2BEBB26F0045074F /* DefaultDeleteMemoToSQLiteUseCase.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		08B912212BBAE46C00F0678E /* Extensions */ = {
@@ -317,12 +342,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		08EF83D12BBAB135004BE32F /* RepositoryProtocol */ = {
+		08EF83D12BBAB135004BE32F /* Repository */ = {
 			isa = PBXGroup;
 			children = (
 				08EF83D22BBAB164004BE32F /* SQLiteRepositorieProtocol.swift */,
 			);
-			path = RepositoryProtocol;
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		08EF83D42BBAE061004BE32F /* ViewModel */ = {
@@ -428,6 +453,8 @@
 				0866E9532BBD918700583BAC /* DeleteMemoToSQLiteUseCase.swift in Sources */,
 				08B912232BBAE48500F0678E /* UITableViewCell+.swift in Sources */,
 				0848DEDB2BBA89B8009E3BC3 /* AppDelegate.swift in Sources */,
+				08AAEDC92BEBB2330045074F /* DefaultUpdateMemoToSQLiteUseCase.swift in Sources */,
+				08AAEDCD2BEBB26F0045074F /* DefaultDeleteMemoToSQLiteUseCase.swift in Sources */,
 				08EF83CB2BBA9FB6004BE32F /* MemoListViewController.swift in Sources */,
 				0848DEDD2BBA89B8009E3BC3 /* SceneDelegate.swift in Sources */,
 				08B912302BBAEE8600F0678E /* UILabel+.swift in Sources */,
@@ -445,6 +472,7 @@
 				08B912282BBAE7D700F0678E /* MemoListTableViewCell.swift in Sources */,
 				0835D75C2BBC3FE500CB07A7 /* UpdateMemoToSQLiteUseCase.swift in Sources */,
 				08B912322BBAEE9400F0678E /* UIColor+.swift in Sources */,
+				08AAEDCB2BEBB2580045074F /* DefaultGetMemoToSQLiteUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

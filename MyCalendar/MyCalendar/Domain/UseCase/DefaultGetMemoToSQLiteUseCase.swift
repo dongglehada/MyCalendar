@@ -1,16 +1,11 @@
 //
-//  GetMemoToSQLiteUseCase.swift
+//  DefaultGetMemoToSQLiteUseCase.swift
 //  MyCalendar
 //
-//  Created by SeoJunYoung on 4/2/24.
+//  Created by SeoJunYoung on 5/8/24.
 //
 
 import Foundation
-
-protocol GetMemoToSQLiteUseCase {
-    var repository: SQLiteRepositorieProtocol { get set }
-    func excute() -> [Memo]
-}
 
 class DefaultGetMemoToSQLiteUseCase: GetMemoToSQLiteUseCase {
     var repository: SQLiteRepositorieProtocol
